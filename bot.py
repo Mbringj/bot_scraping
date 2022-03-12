@@ -1,33 +1,52 @@
-from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
+from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackContext
+from telegram import ReplyKeyboardMarkup, Update, KeyboardButton
+import os
+from dotenv import load_dotenv
 
-TOKEN = '2053876681:AAE3_lbzwXW7kJsrk80o9baoGopDbWEaGjk'
+load_dotenv()
 
+TOKEN = os.getenv('TOKEN_BOT') 
+print(TOKEN)
 
-def start(update, context):
-  update.message.reply_text("""
-    Bienvenu sur le bot officiel de @alone, le bot te permet de partage des messages aux menbre des groupes de discutions,
-    les commandes disponibles sont:
-    - /start
-    - /sendmessage
-    - /addcanal
-    - /addgroup
-    - /viewhistory
-    - /sendmassivemessage
-    - /viewadd
-    - /subscribe
-    - /login
-    - /logout
-    - /buyadd
-    - /contactme
-    enjoy sur telegram
-  """)
+button_list = ['free python course 😉', 'javascript', 'random 1']
+
+def startCommand(update: Update, context: CallbackContext):
+  buttons = [
+    [
+      KeyboardButton('free python course 😉'),
+      KeyboardButton('javascript course'),
+      KeyboardButton('random 1')
+    ],
+    [
+      KeyboardButton('free python course 😉'),
+      KeyboardButton('javascript course'),
+      KeyboardButton('random 1')
+    ],
+    [
+      KeyboardButton('free python course 😉'),
+      KeyboardButton('javascript course'),
+      KeyboardButton('random 1')
+    ],
+    [KeyboardButton('random 1')]
+  ]
+  context.bot.send_message(
+    chat_id=update.effective_chat.id, 
+    text="welcom to telegram bot", 
+    reply_markup=ReplyKeyboardMarkup(buttons)
+  )
+
+def messageHandler(update: Update, context: CallbackContext):
+  for text in button_list:
+    if text in update.message.text:
+      context.bot.send_message(chat_id=update.effective_chat.id, text=text)
+    # else:
+    #   context.bot.send_message(chat_id=update.effective_chat.id, text="no found commade")
 
 def main():
   updater = Updater('2053876681:AAE3_lbzwXW7kJsrk80o9baoGopDbWEaGjk')
-
   dp = updater.dispatcher
-  dp.add_handler(CommandHandler('start', start))
-
+  dp.add_handler(CommandHandler('start', startCommand))
+  dp.add_handler(MessageHandler(Filters.text, messageHandler))
   updater.start_polling()
 
 

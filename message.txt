@@ -1,0 +1,20 @@
+fini de perdre du temps pour chercher t'es cannaux sur telegram
+python telegram bot keyboard button command 
+
+  # update.message.reply_text("""
+  #   Bienvenu sur le bot officiel de @alone, le bot te permet de partage des messages aux menbre des groupes de discutions,
+  #   les commandes disponibles sont:
+  #   - /start
+  #   - /sendmessage
+  #   - /addcanal
+  #   - /addgroup
+  #   - /viewhistory
+  #   - /sendmassivemessage
+  #   - /viewadd
+  #   - /subscribe
+  #   - /login
+  #   - /logout
+  #   - /buyadd
+  #   - /contactme
+  #   enjoy sur telegram
+  # """)
